@@ -1,0 +1,65 @@
+
+
+entity Citizen {
+	firstName String required,
+	lastName String required,
+	dateOfBirth String required,
+	phoneNumber String
+}
+
+entity CurrentAddress {
+	addressLine1 String required,
+	addressLine2 String,
+	city String required,
+	state String required,
+    zipCode String required
+}
+
+entity Test {
+    result String,
+    testType String,
+    collectionDate LocalDate,
+    resultsAnalysisDate LocalDate
+}
+
+entity Vaccination {
+    patientId String,
+    patientCounty String,
+    provider String,
+    vaccinationDate LocalDate,
+    vaccineName String,
+    doseNumber String,
+    lotNumber String,
+    facilityCounty String,
+    vaccinationComplete String
+}
+
+entity ChallengeQuestion {
+	questionNumber Integer required,
+    questionText String required
+}
+
+entity ChallengeAnswers {
+	questionNumber Integer required,
+    answerText String required,
+    answerCorrect Boolean required
+}
+
+relationship OneToMany {
+	Citizen to CurrentAddress,
+    Citizen to Test,
+    Citizen to Vaccination,
+    ChallengeQuestion to ChallengeAnswers
+}
+
+// Set pagination options
+paginate Citizen with infinite-scroll
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
